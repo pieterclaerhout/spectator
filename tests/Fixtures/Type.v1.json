@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Type.v1",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/access-types": {
+      "get": {
+        "operationId": "access-types.index",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "per_page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/accesstype"
+                      },
+                      "description": "data container"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "accesstype": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "id property",
+            "format": "int64"
+          },
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "name property"
+          }
+        },
+        "description": "AccessType model schema"
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "not authenticated"
+      }
+    }
+  }
+}

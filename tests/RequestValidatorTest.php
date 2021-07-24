@@ -253,6 +253,19 @@ class RequestValidatorTest extends TestCase
 
         ];
     }
+
+    public function test_presence_of_type()
+    {
+        Spectator::using('Type.v1.json');
+
+        Route::get('/api/access-types', function () {
+            return [];
+        })->middleware(Middleware::class);
+
+        $this->getJson('/api/access-types'.Str::uuid()->toString().'/comments/1')
+            ->assertValidRequest()
+            ->assertValidResponse();
+    }
 }
 
 class TestUser extends Model
